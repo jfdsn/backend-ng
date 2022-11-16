@@ -9,10 +9,12 @@
   "author": "Jônathan Faria",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "typescript": "^4.8.4"
   },
   "dependencies": {
     "@types/express": "^4.17.14",
+    "bcrypt": "^5.1.0",
     "express": "^4.18.2",
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
