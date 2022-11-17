@@ -5,13 +5,13 @@ export const createUserController = async (req: Request, res: Response, next: Ne
     try {
         const { username, password } = req.body;
     
-        if(username.length <= 3) return new Error("Invalid username.");
-        
-        if(password.length < 8) return new Error("Invalid password.");
+        if(username.length <= 3) throw new Error("Invalid username.");
+
+        const regExp = new RegExp("^(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,}).{8,}$");
+
+        if(!regExp.test(password)) throw new Error("Invalid password.");
     
         const result = await createUserService({ username, password });
-    
-        if(result instanceof Error) return res.status(400).json(result.message);
     
         return res.json(result);
         

@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { AppDataSource } from './src/database/app-data-source';
+import errorMiddleware from './src/middlewares/errorMiddleware';
 import routes from './src/routes/routes';
 
 AppDataSource
@@ -16,5 +17,7 @@ const port = 3000;
 const app = express();
 app.use(express.json());
 app.use('/', routes);
+
+app.use(errorMiddleware);
 
 app.listen(port, () : void => {console.log('App working at port 3000.')});

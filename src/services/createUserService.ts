@@ -8,10 +8,10 @@ type UserReq = {
     password: string
 };
 
-export const createUserService = async ({ username, password }: UserReq): Promise<Error | Users> => {
+export const createUserService = async ({ username, password }: UserReq): Promise<Users> => {
     const userExist = await userRepository.findOneBy({username: username});
     
-    if(userExist) return new Error("User already exists");
+    if(userExist) throw new Error("User already exists.");
     
     const passwordHashed = await hash(password, 8);
     const accountId = await createAccountService();
