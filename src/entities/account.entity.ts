@@ -7,9 +7,15 @@ export class Accounts {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({type: "decimal", precision: 10, scale: 2})
     balance: number
 
+    @Column("int", { array: true, default: "{}"})
+    cashOutId: number[]
+
+    @Column("int", { array: true, default: "{}"})
+    cashInId: number[]
+    
     @OneToMany(() => Transactions, (cashOut) => cashOut.debitedAccount)
     cashOut: Transactions[]
     

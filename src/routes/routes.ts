@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction, Router} from 'express';
 import { createUserController } from '../controllers/createUserController';
+import { doTransactionController } from '../controllers/doTransactionController';
+import { getBalanceController } from '../controllers/getBalanceController';
 import { LoginController } from '../controllers/LoginController';
+import { authorizationMiddleware } from '../middlewares/authorizationMiddleware';
+
 
 const routes = Router();
 
@@ -12,9 +16,11 @@ routes.get('/status', async (req : Request, res : Response, next : NextFunction)
     }
 });
 
-routes.post('/user', createUserController);
-routes.post('/login', LoginController);
 
+routes.post('/user', createUserController); //Body: username, password
+routes.post('/login', LoginController); //Body: username, password
 
+routes.get('/balance', authorizationMiddleware, getBalanceController); //body: username logado
+routes.post('/transaction', authorizationMiddleware, doTransactionController); //Body: value, usernameReceiver
 
 export default routes;

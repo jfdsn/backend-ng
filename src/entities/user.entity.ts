@@ -13,6 +13,9 @@ export class Users {
     @Column({type: 'text'})
     password: string
 
+    @Column()
+    accountId: number
+
     @OneToOne(() => Accounts)
     @JoinColumn()
     account: Accounts

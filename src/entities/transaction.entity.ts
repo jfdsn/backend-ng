@@ -7,8 +7,14 @@ export class Transactions {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({type: "decimal", precision: 10, scale: 2})
     value: number
+
+    @Column({nullable: true})
+    debitedAccountId: number
+    
+    @Column({nullable: true})
+    creditedAccountId: number
 
     @ManyToOne(() => Accounts, (account) => account.cashOut)
     debitedAccount: Accounts

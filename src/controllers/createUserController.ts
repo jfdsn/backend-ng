@@ -13,7 +13,7 @@ export const createUserController = async (req: Request, res: Response, next: Ne
     
         const result = await createUserService({ username, password });
     
-        return res.json(result);
+        return res.status(201).json(result);
         
     } catch (error) {
         next(error);

@@ -11,6 +11,9 @@ export default (error: Error, req: Request, res: Response, next: NextFunction) =
     } else if(error.message == "User or Password incorrect."){
         console.log("User or Password incorrect.");
         res.sendStatus(400).end();
+    } else if(error.message == "Authorization is missing." || error.message == "Token is missing."){
+        console.log("Authorization or Token missing.");
+        res.sendStatus(401).end();
     } else {
         console.log("Intern error.");
         res.sendStatus(500).end();
