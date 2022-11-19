@@ -1,6 +1,7 @@
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { userRepository } from "../repositories";
+import "dotenv/config";
 
 type UserReq = {
     username: string

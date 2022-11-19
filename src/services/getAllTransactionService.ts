@@ -5,7 +5,7 @@ export const getAllTransactionService = async (userId: number, username: string)
     const userCheck = await userRepository.findOneBy({username: username});
     
     //Verify if token's id is equal logged user's id
-    if(userCheck.id != userId) throw new Error(); 
+    if(userCheck.id != userId) throw new Error("Unauthorized request."); 
 
     const { id } = await accountRepository.findOneBy({id: userCheck.accountId});
 

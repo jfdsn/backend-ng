@@ -14,6 +14,12 @@ export default (error: Error, req: Request, res: Response, next: NextFunction) =
     } else if(error.message == "Authorization is missing." || error.message == "Token is missing."){
         console.log("Authorization or Token missing.");
         res.sendStatus(401).end();
+    } else if(error.message == "Insuficient balance." || error.message == "User no exist."){
+        console.log("Insuficient balance or wrong username.");
+        res.sendStatus(400).end();
+    } else if(error.message == "Unauthorized request."){
+        console.log("Unauthorized request.");    
+        res.sendStatus(401).end();
     } else {
         console.log("Intern error.");
         res.sendStatus(500).end();
