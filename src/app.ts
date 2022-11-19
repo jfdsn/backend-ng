@@ -15,7 +15,7 @@ AppDataSource
 const port = 3000;
 
 const app = express();
-app.use(express.json());
+app.use(express.json({strict:true}));
 app.use('/', routes);
 
 app.use(errorMiddleware);

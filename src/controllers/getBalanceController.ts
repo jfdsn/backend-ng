@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { userRepository } from "../repositories";
 import { getBalanceService } from "../services/getBalanceService";
 
 export const getBalanceController = async (req: Request, res: Response, next: NextFunction) => {
@@ -10,6 +9,7 @@ export const getBalanceController = async (req: Request, res: Response, next: Ne
 
         return res.json({balance: result});
     } catch (error) {
+        console.log(error);
         next(error);
     }
 };

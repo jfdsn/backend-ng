@@ -21,7 +21,7 @@ export const doTransactionService =
     const userReceiverAccount = await accountRepository.findOneBy({id: userReceiver.accountId});
     
     if(userAccount.balance < value) throw new Error("Insuficient balance.");
-    
+    if(!userReceiver) throw new Error("User no exist.");
 
     const queryRunner = AppDataSource.createQueryRunner();
     await queryRunner.connect();

@@ -11,7 +11,7 @@ export const authorizationMiddleware = async (req: Request, res: Response, next:
         
         if(!token) throw new Error("Token is missing.");
 
-        verify(token, 'My_salty')
+        verify(token, process.env.SECRET_KEY);
   
         const { sub } = decode(token);
         req.userId = parseInt(sub.toString());

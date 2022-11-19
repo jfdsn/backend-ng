@@ -16,7 +16,7 @@ export const LoginService = async ({ username, password}: UserReq) => {
     
     if(!comparePassword) throw new Error("User or Password incorrect.");
 
-    const token = sign({}, 'My_salty', {subject: userExist.id.toString(), expiresIn: '24h'}); //TODO arrumar secret word para .env
+    const token = sign({},process.env.SECRET_KEY, {subject: userExist.id.toString(), expiresIn: '24h'}); 
 
     return { token }
 };
