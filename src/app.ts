@@ -2,6 +2,7 @@ import * as express from 'express';
 import { AppDataSource } from './database/app-data-source';
 import errorMiddleware from './middlewares/errorMiddleware';
 import routes from './routes/routes';
+import * as cors from "cors";
 
 AppDataSource
     .initialize()
@@ -12,12 +13,15 @@ AppDataSource
         console.error("Error during Data Source initialization:", err)
     });
 
-const port = 3000;
+const port = 5000;
 
 const app = express();
+app.use(cors());
 app.use(express.json({strict:true}));
 app.use('/', routes);
 
 app.use(errorMiddleware);
 
-app.listen(port, () : void => {console.log('App working at port 3000.')});
+app.listen(port, () : void => {
+    console.log(`App working at port ${port}.`)
+});
