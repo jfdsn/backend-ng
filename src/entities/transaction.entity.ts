@@ -22,6 +22,6 @@ export class Transactions {
     @ManyToOne(() => Accounts, (account) => account.cashIn)
     creditedAccount: Accounts
 
-    @CreateDateColumn()
-    created_at: Date
+    @CreateDateColumn({type:'date'})
+    created_at: string
 };

@@ -1,10 +1,6 @@
 import { accountRepository, userRepository } from "../repositories";
 
-export const getBalanceService = async (userId: number, username: string): Promise<Number> => {
-    const userCheck = await userRepository.findOneBy({username: username});
-    
-    //Verify if token's id is equal logged user's id
-    if(userCheck.id != userId) throw new Error("Unauthorized request."); 
+export const getBalanceService = async (userId: number): Promise<Number> => {
 
     const user = await userRepository.findOneBy({id: userId});
 

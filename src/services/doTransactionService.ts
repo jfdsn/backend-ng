@@ -5,22 +5,21 @@ import { accountRepository, userRepository } from '../repositories';
 
 type ReqTransaction = {
     userId: number
-    value: number
+    valor: number
     usernameReceiver: string
 };
 
 
 export const doTransactionService =
- async ({ userId, value, usernameReceiver }: ReqTransaction) => {
-    const money = value;
-    
+ async ({ userId, valor, usernameReceiver }: ReqTransaction) => {
+
     const user = await userRepository.findOneBy({id: userId});
     const userAccount = await accountRepository.findOneBy({id: user.accountId});
  
     const userReceiver = await userRepository.findOneBy({username: usernameReceiver});
     const userReceiverAccount = await accountRepository.findOneBy({id: userReceiver.accountId});
     
-    if(userAccount.balance < value) throw new Error("Insuficient balance.");
+    if(userAccount.balance < valor) throw new Error("Insuficient balance.");
     if(!userReceiver) throw new Error("User no exist.");
 
     const queryRunner = AppDataSource.createQueryRunner();
@@ -39,7 +38,7 @@ export const doTransactionService =
     */
     try {
         const newTransaction = queryRunner.manager.create(Transactions, {
-            value: value,
+            value: valor,
             debitedAccountId: userAccount.id,
             creditedAccountId: userReceiverAccount.id
         });
@@ -47,8 +46,8 @@ export const doTransactionService =
         const newTransactionId = await queryRunner.manager.save(newTransaction);
         
         
-        userAccount.balance = (userAccount.balance - money);
-        userReceiverAccount.balance = (1*userReceiverAccount.balance + money);
+        userAccount.balance = (userAccount.balance - valor);
+        userReceiverAccount.balance = (1*userReceiverAccount.balance + valor);
         console.log(newTransactionId.id);
         userAccount.cashOutId.push(newTransactionId.id);
         userReceiverAccount.cashInId.push(newTransactionId.id);
