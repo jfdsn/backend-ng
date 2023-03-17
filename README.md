@@ -2,7 +2,7 @@
 
 
 Back-end do projeto proposto pelo tech challenge da empresa NG.Cash. É uma api desenvolvida
-em nodejs/express e que faz comunicação com o BD(postgres).
+em nodejs/express e que faz comunicação com o BD(postgres). Realiza cadastro de novos usuários adicionando 100,00 de crédito na nova conta e faz a autenticação de login usando token JWT. Quando devidamente logado, permite transações com outros usuários e a pesquisa das transações enviadas e recebidas.
 
 
 ## :hammer: Funcionalidades do projeto
