@@ -4,6 +4,10 @@
 Back-end do projeto proposto pelo tech challenge da empresa NG.Cash. É uma api desenvolvida
 em nodejs/express e que faz comunicação com o BD(postgres).
 
+![Imagem status](https://github.com/jfdsn/backend-ng/blob/main/public/Imgs/api-status.png)
+![Imagem unauth route](https://github.com/jfdsn/backend-ng/blob/main/public/Imgs/unauth-route.png)
+
+
 
 ## :hammer: Funcionalidades do projeto
 
@@ -26,21 +30,29 @@ Com o docker instalado no ambiente, siga os seguintes passos:
 
 - `Passo 1`: Crie o container do BD Postgres que será utilizado na aplicação:
 
-"docker run --name teste-postgres -e POSTGRES_PASSWORD=test -e POSTGRES_DB=test -p 5432:5432 -d postgres"
+```sh
+    docker run --name teste-postgres -e POSTGRES_PASSWORD=test -e POSTGRES_DB=test -p 5432:5432 -d postgres
+```
 
 - `Passo 2`: Verifique o ip do container teste-postgres pelo comando:
 
-    "docker inspect -f '{{.NetworkSettings.IPAddress}}' teste-postgres" 
+```sh
+    docker inspect -f '{{.NetworkSettings.IPAddress}}' teste-postgres
+```
 
 Caso o ip seja 172.17.0.2 , siga para o passo 3. Caso contrario vá até o arquivo app-data-source localizado no diretório src/database e mude o valor de 'host:' para o ip informado pelo comando. 
 
 - `Passo 3`: O próximo passo é gerar a imagem do backend. No terminal navegue até o diretório raíz do projeto Backend-ng e execute o comando:
 
-    "docker build -t backend-ng ."
+```sh
+    docker build -t backend-ng .
+```
 
 - `Passo 4`: Em seguida irá gerar o container do backend da aplicação:
 
-    "docker run --rm --name backend -d -p 5000:5000 backend-ng"
+```sh
+    docker run --rm --name backend -d -p 5000:5000 backend-ng 
+```
 
 Feito esses procedimentos a API deverá estar devidamente funcionando e as tabelas do BD criadas automaticamente pelo Typeorm. Caso queira verificar é possível acessar no navegador pelo caminho 'localhost:5000/status'.
 
